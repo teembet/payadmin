@@ -2,9 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import Toggle from "../sidebar/Toggle";
 import Logo from "../logo/Logo";
-import News from "../news/News";
+// import News from "../news/News";
 import User from "./dropdown/user/User";
-import Notification from "./dropdown/notification/Notification";
+// import Notification from "./dropdown/notification/Notification";
 
 const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
   const headerClass = classNames({
@@ -28,17 +28,17 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
           <div className="nk-header-brand d-xl-none">
             <Logo />
           </div>
-          <div className="nk-header-news d-none d-xl-block">
+          {/* <div className="nk-header-news d-none d-xl-block">
             <News />
-          </div>
+          </div> */}
           <div className="nk-header-tools">
             <ul className="nk-quick-nav">
               <li className="user-dropdown"  onClick={() => setVisibility(false)}>
                 <User />
               </li>
-              <li className="notification-dropdown mr-n1"  onClick={() => setVisibility(false)}>
+              {/* <li className="notification-dropdown mr-n1"  onClick={() => setVisibility(false)}>
                 <Notification />
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

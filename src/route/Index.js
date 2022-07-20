@@ -8,6 +8,7 @@ import Homepage from "../pages/Homepage";
 import Crypto from "../pages/Crypto";
 import Analytics from "../pages/Analytics";
 import Invest from "../pages/Invest";
+import Dashboard from "../pages/Dashboard";
 
 import Component from "../pages/components/Index";
 import Accordian from "../pages/components/Accordions";
@@ -116,6 +117,7 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/analytics`} component={Analytics}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/invest`} component={Invest}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/_blank`} component={Blank}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard}></Route>
 
         {/*Pre-built Pages*/}
         <Route exact path={`${process.env.PUBLIC_URL}/project-card`} component={ProjectCardPage}></Route>

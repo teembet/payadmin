@@ -17,32 +17,52 @@ import {
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import useSignIn from "../../hooks/useSignIn";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [errorVal, setError] = useState("");
+  const { isLoading, error, signIn } = useSignIn();
 
   const onFormSubmit = (formData) => {
+    console.log(formData, "before reqBody")
     setLoading(true);
-    const loginName = "info@softnio.com";
-    const pass = "123456";
-    if (formData.name === loginName && formData.passcode === pass) {
-      localStorage.setItem("accessToken", "token");
-      setTimeout(() => {
-        window.history.pushState(
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-          "auth-login",
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-        );
-        window.location.reload();
-      }, 2000);
+    if (!formData.email && !formData.password) return toast.error("Please fill in all fields")
+
+    const {email, password} = formData;
+
+    if (email && password) {
+      signIn(email, password);
     } else {
-      setTimeout(() => {
-        setError("Cannot login with credentials");
-        setLoading(false);
-      }, 2000);
+     toast.error("Please fill in all fields");
     }
+    setLoading(false);
+    // let reqBody = {
+    //   email: formData.email,
+    //   password: formData.password
+    // }
+
+    // console.log(reqBody,"reqBody")
+    // const loginName = "info@softnio.com";
+    // const pass = "123456";
+    // if (formData.name === loginName && formData.passcode === pass) {
+    //   localStorage.setItem("accessToken", "token");
+    //   setTimeout(() => {
+    //     window.history.pushState(
+    //       `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+    //       "auth-login",
+    //       `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+    //     );
+    //     window.location.reload();
+    //   }, 2000);
+    // } else {
+    //   setTimeout(() => {
+    //     setError("Cannot login with credentials");
+    //     setLoading(false);
+    //   }, 2000);
+    // }
   };
 
   const { errors, register, handleSubmit } = useForm();
@@ -54,7 +74,7 @@ const Login = () => {
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
             <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
-              <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
+              {/* <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" /> */}
               <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
             </Link>
           </div>
@@ -85,11 +105,11 @@ const Login = () => {
                 </div>
                 <div className="form-control-wrap">
                   <input
-                    type="text"
+                    type="email"
                     id="default-01"
-                    name="name"
+                    name="email"
                     ref={register({ required: "This field is required" })}
-                    defaultValue="info@softnio.com"
+                    // defaultValue="info@softnio.com"
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
@@ -99,10 +119,10 @@ const Login = () => {
               <FormGroup>
                 <div className="form-label-group">
                   <label className="form-label" htmlFor="password">
-                    Passcode
+                    Password
                   </label>
                   <Link className="link link-primary link-sm" to={`${process.env.PUBLIC_URL}/auth-reset`}>
-                    Forgot Code?
+                    Forgot Password?
                   </Link>
                 </div>
                 <div className="form-control-wrap">
@@ -121,8 +141,8 @@ const Login = () => {
                   <input
                     type={passState ? "text" : "password"}
                     id="password"
-                    name="passcode"
-                    defaultValue="123456"
+                    name="password"
+                    // defaultValue="123456"
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
@@ -132,15 +152,15 @@ const Login = () => {
               </FormGroup>
               <FormGroup>
                 <Button size="lg" className="btn-block" type="submit" color="primary">
-                  {loading ? <Spinner size="sm" color="light" /> : "Sign in"}
+                  {isLoading ? <Spinner size="sm" color="light" /> : "Sign in"}
                 </Button>
               </FormGroup>
             </Form>
-            <div className="form-note-s2 text-center pt-4">
-              {" "}
+            {/* <div className="form-note-s2 text-center pt-4">
+             
               New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth-register`}>Create an account</Link>
-            </div>
-            <div className="text-center pt-4 pb-3">
+            </div> */}
+            {/* <div className="text-center pt-4 pb-3">
               <h6 className="overline-title overline-title-sap">
                 <span>OR</span>
               </h6>
@@ -168,7 +188,7 @@ const Login = () => {
                   Google
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </PreviewCard>
         </Block>
         <AuthFooter />
