@@ -23,8 +23,10 @@ import useResetPassword from "../../hooks/useResetPassword";
 const ResetPassword = () => {
   const [passState, setPassState] = useState(false);
   const { isLoading, resetPassword } = useResetPassword();
-//   const [errorVal, setError] = useState("");
-  const email= "kenneth.osekhuemen@iisysgroup.com";
+  //   const [errorVal, setError] = useState("");
+  const email = localStorage.getItem("emailforpasswordchange")
+    ? JSON.parse(localStorage.getItem("emailforpasswordchange"))
+    : "";
 
   const urlParams = new URLSearchParams(window.location.search);
   let token = urlParams.get("token");
@@ -46,10 +48,10 @@ const ResetPassword = () => {
     }
 
     if (new_password && token) {
-        resetPassword(email, token, new_password);
-      } else {
-        toast.error("Unable to process your request");
-      }
+      resetPassword(email, token, new_password);
+    } else {
+      toast.error("Unable to process your request");
+    }
   };
   const { errors, register, handleSubmit } = useForm();
 

@@ -23,6 +23,7 @@ const useForgotPassword = () => {
         throw new Error("Unable to process request");
       }
       toast.success(`${response_message ? response_message : "Verification link successfully sent to your email"}`);
+      localStorage.setItem(JSON.stringify('emailforpasswordchange', email))
       setIsLoading(false);
       // history.push(`/reset-password`);
     } catch (error) {
