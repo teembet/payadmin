@@ -12,7 +12,7 @@ const Layout = () => {
   const [visibility, setVisibility] = useState(false);
   const [themeState] = useState({
     main: "default",
-    sidebar: "dark",
+    sidebar: "light",
     header: "white",
     skin: "light",
   });

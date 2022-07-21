@@ -5,6 +5,7 @@ import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import useLogOut from "../../../../hooks/useLogOut";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { findUpper } from "../../../../utils/Utils";
 
 const User = () => {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,7 @@ const User = () => {
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
           <div className="user-card sm">
             <div className="user-avatar">
-              <span>AB</span>
+              <span>{findUpper(name)}</span>
             </div>
             <div className="user-info">
               <span className="lead-text">{name}</span>
