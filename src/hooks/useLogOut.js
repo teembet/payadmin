@@ -9,7 +9,7 @@ const useLogOut = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAborted, setIsAborted] = useState(false);
   const [error, setError] = useState(null);
-  const { dispatch } = useAuthContext();
+  const { dispatch , user} = useAuthContext();
 
   const logout = () => {
     setIsLoading(true);
@@ -23,7 +23,9 @@ const useLogOut = () => {
       if (!isAborted) {
         setIsLoading(false);
         setError(null);
-        history.push(`${process.env.PUBLIC_URL}/auth-login`);
+        // console.log(user, 'before logout')
+        history.push(`/auth-login`)
+        // window.reload()
       }
     } catch (error) {
       if (!isAborted) {

@@ -7,7 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const PrivateRoute = ({ exact, component: Component, ...rest }) => {
   const { user} = useAuthContext();
-  // console.log(isAuthenticated, user);
+  console.log(process.env.PUBLIC_URL);
 
   return(
   <Route
@@ -17,7 +17,7 @@ const PrivateRoute = ({ exact, component: Component, ...rest }) => {
       user ? (
         <Component {...props} {...rest}></Component>
       ) : (
-        <Redirect to={`${process.env.PUBLIC_URL}/auth-login`}></Redirect>
+        <Redirect to={`/auth-login`}></Redirect>
       )
     }
   ></Route>)

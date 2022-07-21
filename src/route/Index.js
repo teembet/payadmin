@@ -117,7 +117,7 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/analytics`} component={Analytics}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/invest`} component={Invest}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/_blank`} component={Blank}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard}></Route>
+        <Route exact path={`/dashboard`} component={Dashboard}></Route>
 
         {/*Pre-built Pages*/}
         <Route exact path={`${process.env.PUBLIC_URL}/project-card`} component={ProjectCardPage}></Route>

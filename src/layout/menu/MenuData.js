@@ -1,5 +1,25 @@
 const menu = [
   {
+    icon: "coins",
+    text: "Dashboard",
+    link: "/dashboard",
+  },
+  {
+    icon: "growth",
+    text: "Analytics",
+    link: "/analytics",
+  },
+  {
+    icon: "users",
+    text: "Agents",
+    link: "/agents",
+  },
+  {
+    icon: "card-view",
+    text: "POS Shop",
+    link: "/upgrades",
+  },
+  {
     icon: "dashlite",
     text: "Default Dashboard",
     link: "/",

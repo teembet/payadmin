@@ -17,15 +17,19 @@ const useSignIn = () => {
 
     try {
       const res = await AuthService.login(email, password);
-      if (res.response_code === "100") {
-        console.log("100 rs code");
+      const{response_code, user} = res
+      if (response_code === "100") {
+        // console.log("100 rs code");
         warning("Incorrect Email or Password");
         setIsLoading(false);
-        throw new Error("Error signing in. Incorrect Email or Password");
-      }
-      dispatch({ type: "LOGIN", payload: res.data });
+        throw new Error("Error signing in. Incorrect Email or Password")
+      };
+      // console.log(res, "useSignIn res")
+      dispatch({ type: "LOGIN", payload: user });
       setIsLoading(false);
-      history.push(`${process.env.PUBLIC_URL}/dashboard`);
+      // console.log(user, 'after login')
+
+      history.push(`/dashboard`);
 
       if (!isAborted) {
         setIsLoading(false);

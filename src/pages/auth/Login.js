@@ -7,7 +7,7 @@ import AuthFooter from "./AuthFooter";
 import {
   Block,
   BlockContent,
-  BlockDes,
+  // BlockDes,
   BlockHead,
   BlockTitle,
   Button,
@@ -21,24 +21,23 @@ import { toast } from "react-toastify";
 import useSignIn from "../../hooks/useSignIn";
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [errorVal, setError] = useState("");
   const { isLoading, error, signIn } = useSignIn();
 
   const onFormSubmit = (formData) => {
-    console.log(formData, "before reqBody")
-    setLoading(true);
-    if (!formData.email && !formData.password) return toast.error("Please fill in all fields")
-
-    const {email, password} = formData;
+    // console.log(formData, "before reqBody");
+    // setLoading(true);
+    if (!formData.email && !formData.password) return toast.error("Please fill in all fields");
+    const { email, password } = formData;
 
     if (email && password) {
       signIn(email, password);
     } else {
-     toast.error("Please fill in all fields");
+      toast.error("Please fill in all fields");
     }
-    setLoading(false);
+    // setLoading(false);
     // let reqBody = {
     //   email: formData.email,
     //   password: formData.password
@@ -73,7 +72,7 @@ const Login = () => {
       <PageContainer>
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
-            <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
+            <Link to={"/dashboard"} className="logo-link">
               <img className="logo-dark logo-img logo-img-lg" src={Logo} alt="logo" />
               {/* <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" /> */}
             </Link>
@@ -83,16 +82,15 @@ const Login = () => {
             <BlockHead>
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
-                <BlockDes>
+                {/* <BlockDes>
                   <p>Access Dashlite using your email and passcode.</p>
-                </BlockDes>
+                </BlockDes> */}
               </BlockContent>
             </BlockHead>
             {errorVal && (
               <div className="mb-3">
                 <Alert color="danger" className="alert-icon">
-                  {" "}
-                  <Icon name="alert-circle" /> Unable to login with credentials{" "}
+                  <Icon name="alert-circle" /> Unable to login with credentials
                 </Alert>
               </div>
             )}
@@ -113,7 +111,7 @@ const Login = () => {
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
-                  {errors.name && <span className="invalid">{errors.name.message}</span>}
+                  {errors.email && <span className="invalid">{errors.email.message}</span>}
                 </div>
               </FormGroup>
               <FormGroup>
@@ -121,7 +119,7 @@ const Login = () => {
                   <label className="form-label" htmlFor="password">
                     Password
                   </label>
-                  <Link className="link link-primary link-sm" to={`${process.env.PUBLIC_URL}/auth-reset`}>
+                  <Link className="link link-primary link-sm" to={`/forgot-password`}>
                     Forgot Password?
                   </Link>
                 </div>
@@ -147,7 +145,7 @@ const Login = () => {
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                   />
-                  {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
+                  {errors.password && <span className="invalid">{errors.password.message}</span>}
                 </div>
               </FormGroup>
               <FormGroup>
